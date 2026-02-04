@@ -1,7 +1,7 @@
 module mux4_1 (
-    input  logic [3:0] d,
-    input  logic [1:0] sel,
-    output logic y
+    input  logic [3:0] d, //A adição dos canais da Mux (Como são 2 bits são 4 canais)
+    input  logic [1:0] sel,//O seletor de canal
+    output logic y //A saída 
 );
 
     always_comb begin
@@ -12,6 +12,6 @@ module mux4_1 (
             2'b11: y = d[3];
             default: y = 1'b0;
         endcase
+        //A lógica que seleciona o canal
     end
-
 endmodule
