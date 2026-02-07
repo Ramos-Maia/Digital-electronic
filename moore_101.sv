@@ -30,7 +30,7 @@ module moore_101 (
             S0:  next_state = x ? S1 : S0;
             S1:  next_state = x ? S1 : S2;
             S2:  next_state = x ? S3 : S0;
-            S3:  next_state = x ? S1 : S2; // chave da sobreposição, a estrutura x ? Sx : Sy, pode é equivalente a:
+            S3:  next_state = x ? S1 : S2; // chave da sobreposição, a estrutura x ? Sx : Sy, é equivalente a:
                                                                                                                         //if(x)
                                                                                                                             //next_state = S1;
                                                                                                                         //else
