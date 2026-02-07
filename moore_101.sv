@@ -22,7 +22,7 @@ module moore_101 (
             state <= next_state;
     end
 
-    // Próximo estado (com sobreposição)
+    // Próximo estado
     always_comb begin
         next_state = state;
 
