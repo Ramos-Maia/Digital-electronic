@@ -4,7 +4,7 @@ module mux4_1 (
     output logic y //A saída 
 );
 
-    always_comb begin
+    always @(*) begin
         case (sel)
             2'b00: y = d[0];
             2'b01: y = d[1];
@@ -15,3 +15,4 @@ module mux4_1 (
         //A lógica que seleciona o canal
     end
 endmodule
+
