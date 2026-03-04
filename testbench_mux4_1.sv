@@ -16,6 +16,8 @@ module tb_mux4_1;
 
     // estímulos
     initial begin
+        $dumpfile("mux4.vcd");
+        $dumpvars(0, tb_mux4_1);
         $display("Tempo |   d   | sel | y");
         $display("------------------------");
 
