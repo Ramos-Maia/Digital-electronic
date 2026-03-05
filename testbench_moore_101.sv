@@ -53,6 +53,8 @@ module tb_moore_101;
 
     // monitor
     initial begin
+        $dumpfile("moore_101.vcd"); //Criar um arquivo vcd
+        $dumpvars(0, tb_moore_101);
         $display("Tempo | clk | rst_n | x | z");
         $display("-----------------------------");
         $monitor("%4t  |  %b  |   %b   | %b | %b",
