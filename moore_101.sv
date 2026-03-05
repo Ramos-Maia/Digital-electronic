@@ -23,7 +23,7 @@ module moore_101 (
     end
 
     // Próximo estado
-    always_comb begin
+    always @(*) begin
         next_state = state_t'(state);  // cast explícito para evitar erro
 
         case (state)
