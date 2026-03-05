@@ -1,62 +1,64 @@
 `timescale 1ns/1ps
 
-module tb_moore_101;
+module testbench_moore_101;
 
-    // sinais
     logic clk;
     logic rst_n;
     logic x;
     logic z;
 
-    // instancia o DUT
-    moore_101 dut (
-        .clk   (clk),
-        .rst_n (rst_n),
-        .x     (x),
-        .z     (z)
+    // Instancia o módulo
+    moore_101 uut (
+        .clk(clk),
+        .rst_n(rst_n),
+        .x(x),
+        .z(z)
     );
 
-    // geração do clock (10 ns)
+    // Clock de 10ns
+    initial clk = 0;
     always #5 clk = ~clk;
 
-    // estímulos
+    // Estímulos
     initial begin
-        // inicialização
-        clk   = 0;
+        // Inicialização
         rst_n = 0;
-        x     = 0;
-
-        // reset assíncrono
+        x = 0;
         #12;
         rst_n = 1;
 
-        // sequência: 01010101000011
-        @(posedge clk) x = 0;
-        @(posedge clk) x = 1;
-        @(posedge clk) x = 0;
-        @(posedge clk) x = 1;
-        @(posedge clk) x = 0;
-        @(posedge clk) x = 1;
-        @(posedge clk) x = 0;
-        @(posedge clk) x = 1;
-        @(posedge clk) x = 0;
-        @(posedge clk) x = 0;
-        @(posedge clk) x = 0;
-        @(posedge clk) x = 0;
-        @(posedge clk) x = 1;
-        @(posedge clk) x = 1;
+        // Sequência de teste
+        // Testando detecção 101
+        x = 1; #10;  // S1
+        x = 0; #10;  // S2
+        x = 1; #10;  // S3 -> saída z=1
+        x = 1; #10;  // S1
+        x = 0; #10;  // S2
+        x = 1; #10;  // S3 -> saída z=1
+        x = 0; #10;  // S0
+        x = 1; #10;  // S1
+        x = 1; #10;  // S1
+        x = 0; #10;  // S2
+        x = 1; #10;  // S3 -> saída z=1
 
-        // encerra simulação
+        // Finaliza simulação
         #20;
         $finish;
     end
 
-    // monitor
+    // Monitor
     initial begin
-        $dumpfile("moore_101.vcd"); //Criar um arquivo vcd
-        $dumpvars(0, tb_moore_101);
-        $display("Tempo | clk | rst_n | x | z");
-        $display("-----------------------------");
+        $display("Time\tclk\trst_n\tx\tz");
+        $monitor("%0t\t%b\t%b\t%b\t%b", $time, clk, rst_n, x, z);
+    end
+
+    // Gerar waveform
+    initial begin
+        $dumpfile("moore_101.vcd");
+        $dumpvars(0, testbench_moore_101);
+    end
+
+endmodule
         $monitor("%4t  |  %b  |   %b   | %b | %b",
                   $time, clk, rst_n, x, z);
     end
