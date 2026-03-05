@@ -24,17 +24,17 @@ module moore_101 (
 
     // Próximo estado
     always_comb begin
-        next_state = state;
+        next_state = state_t'(state);  // cast explícito para evitar erro
 
         case (state)
             S0:  next_state = x ? S1 : S0;
             S1:  next_state = x ? S1 : S2;
             S2:  next_state = x ? S3 : S0;
             S3:  next_state = x ? S1 : S2; // chave da sobreposição, a estrutura x ? Sx : Sy, é equivalente a:
-                                                                                                                        //if(x)
-                                                                                                                            //next_state = S1;
-                                                                                                                        //else
-                                                                                                                            //next_state = S0;
+                                             // if(x)
+                                             //     next_state = S1;
+                                             // else
+                                             //     next_state = S0;
             default: next_state = S0;
         endcase
     end
