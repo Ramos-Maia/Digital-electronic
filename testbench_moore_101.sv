@@ -59,8 +59,3 @@ module testbench_moore_101;
     end
 
 endmodule
-        $monitor("%4t  |  %b  |   %b   | %b | %b",
-                  $time, clk, rst_n, x, z);
-    end
-
-endmodule
