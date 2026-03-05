@@ -1,5 +1,4 @@
 module mux4_1 (
-    input  logic clk,        // clock necessário para LibreLane
     input  logic [3:0] d,    // A adição dos canais da Mux (Como são 2 bits são 4 canais)
     input  logic [1:0] sel,  // O seletor de canal
     output logic y            // A saída 
@@ -19,10 +18,4 @@ module mux4_1 (
         // A lógica que seleciona o canal
     end
 
-    // Saída registrada para que LibreLane reconheça o clock
-    always @(posedge clk) begin
-        y <= y_comb;
-    end
-
 endmodule
-
